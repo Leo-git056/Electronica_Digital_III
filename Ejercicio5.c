@@ -1,13 +1,13 @@
 #include "LPC17xx.h"
 
-#define n 8
+#define n 8 // cantidad de datos a promediar
 
-int16_t datos[8];
+
 
 
 
 void configGPIO(void);
-void lecturaDatos(void);
+void lecturaDatos(int16_t arr[]);
 void borrarViejo(int16_t arr[]);
 void agregarNuevo(int16_t arr[]);
 int16_t calculoPromedio(int16_t arr[]);
@@ -16,9 +16,11 @@ void retardo(uint32_t tiempo);
 
 
 int main (void){
+    int16_t datos[n] = {0};
+
     int16_t promedio = 0;
     configGPIO();
-    lecturaDatos();
+    lecturaDatos(datos);
     while(1){
         
         borrarViejo(datos);
@@ -48,10 +50,10 @@ void configGPIO(void){
 
 }
 
-void lecturaDatos(){
+void lecturaDatos(int16_t arr[]){
     int16_t i;
-    for(i=0; i<8; i++){
-        datos[i] = (LPC_GPIO2->FIOPIN & (0xFFFF)); // Lee los datos de P2.0 a P2.15
+    for(i=0; i<n; i++){
+        arr[i] = (LPC_GPIO2->FIOPIN & (0xFFFF)); // Lee los datos de P2.0 a P2.15
     }
 
 }
