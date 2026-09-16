@@ -1,4 +1,6 @@
-#include "LPC17xx.h"    
+#include "sdtint.h"  
+#include "stdio.h"  
+#include "LPC17xx.h"
 
 void configGPIO(void);
 const char* identificarPulsador(void);
